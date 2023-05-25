@@ -2,23 +2,22 @@
 {-# OPTIONS_GHC -Wno-unused-top-binds #-}
 {-# OPTIONS_GHC -Wno-partial-fields #-}
 {-# OPTIONS_GHC -Wno-unused-imports #-}
-module Language.Wasm.Interactive where
+module Main where
 
 import qualified Data.ByteString.Lazy as LBS
 import qualified Language.Wasm as Wasm
 import qualified Language.Wasm.Script as Script
-import qualified Data.List as List
 
 
--- wasm script
 type Filename = String
 
+-- wasm script
 wast :: Filename
 wast = "array_test2.wast"
 
-evalWAST :: Filename -> IO ()
-evalWAST file = do
-  test <- LBS.readFile ("tests/abhi_test/" ++ file)
+main :: IO ()
+main = do
+  test <- LBS.readFile ("tests/abhi_test/" ++ wast)
   case Wasm.parseScript test of
     Right script -> 
       Script.runScript (\msg assert -> putStrLn ("Failed assert: " ++ msg ++ ". Assert " ++ show assert)) script
