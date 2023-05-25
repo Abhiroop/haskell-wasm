@@ -1,0 +1,17 @@
+main.ml
+ let () =....Run.run_string arg  // most likely this
+         .....Run.run_stdin ()
+
+run.ml
+run_string 
+  -> run_script 
+      -> run_command
+           -> run_action
+                match Invoke.... Eval.invoke
+                    
+eval.ml (Eval.invoke)
+invoke
+  let c = config empty_module_inst (List.rev vs) .....
+  -> eval
+      -> step
+                   

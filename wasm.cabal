@@ -30,6 +30,7 @@ source-repository head
 
 library
   exposed-modules:
+      Language.Wasm.Interactive
       Language.Wasm.Script
       Language.Wasm.Lexer
       Language.Wasm.Structure

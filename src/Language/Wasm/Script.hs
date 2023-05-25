@@ -271,7 +271,13 @@ runScript onAssertFail script = do
             let (ident, m) = buildModule moduleDef in
             addModule ident m st
         runCommand st (Register name i) = return $ addToRegistery name i st
-        runCommand st (Action action) = runAction st action >> return st
+        runCommand st (Action action) = do
+            res <- runAction st action
+            putStrLn "...Output for Invoking..."
+            case res of
+               Just val -> putStrLn $ show val
+               Nothing  -> putStrLn "No result produced"
+            return st
         runCommand st (Assertion pos assertion) = do
             fst <$> flip State.execStateT (st, ("Line " ++ show pos)) (runAssert assertion)
         runCommand st _ = return st
